@@ -15,10 +15,12 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     game.cpp \
-    hex.cpp
+    hex.cpp \
+    hex_board.cpp
 
 HEADERS  += \
     game.h \
-    hex.h
+    hex.h \
+    hex_board.h
 
 FORMS    +=

@@ -1,9 +1,9 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include "hex_board.h"
+
 #include <QGraphicsView>
-#include <QGraphicsScene>
-#include <QString>
 
 class Game : public QGraphicsView
 {
@@ -12,7 +12,7 @@ public:
     void start();
 
     QGraphicsScene * scene;
-    // HexBoard * hexBord; TODO
+    HexBoard * hex_board;
     QString whos_turn;
 private:
 };

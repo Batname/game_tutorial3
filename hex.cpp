@@ -1,9 +1,5 @@
 #include "hex.h"
 
-#include <QVector>
-#include <QPointF>
-#include <QPolygonF>
-
 Hex::Hex(QGraphicsItem *parent)
 {
     // draw
