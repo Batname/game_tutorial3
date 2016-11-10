@@ -24,20 +24,23 @@ Button::Button(QString name, QGraphicsItem *parent) : QGraphicsRectItem(parent)
 
 void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-
+    emit clicked();
 }
 
 void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
 {
-
+    // change collor
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(Qt::cyan);
+    setBrush(brush);
 }
 
 void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
 {
-
+    // change collor
+    QBrush brush;
+    brush.setStyle(Qt::SolidPattern);
+    brush.setColor(Qt::darkCyan);
+    setBrush(brush);
 }
-
-//void Button::clicked()
-//{
-
-//}

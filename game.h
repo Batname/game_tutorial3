@@ -7,14 +7,18 @@
 
 class Game : public QGraphicsView
 {
+    Q_OBJECT
 public:
     Game(QWidget * parent=0);
-    void start();
+    void displayMainMenu();
 
     QGraphicsScene * scene;
     HexBoard * hex_board;
     QString whos_turn;
 private:
+
+public slots:
+    void start();
 };
 
 #endif // GAME_H

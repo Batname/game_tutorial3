@@ -5,6 +5,7 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QGraphicsTextItem>
 #include <QObject>
+#include <QGraphicsSceneHoverEvent>
 
 enum ButtonType{
     READ_BUTTON,
@@ -21,8 +22,9 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent *event);
     void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
     void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-//signals:
-//    void clicked();
+
+signals:
+    void clicked();
 
 private:
     QString name;
