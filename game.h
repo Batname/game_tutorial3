@@ -12,13 +12,21 @@ public:
     Game(QWidget * parent=0);
     void displayMainMenu();
 
+    QString getWhosTurn();
+    void setWhosTurn(QString player);
+
     QGraphicsScene * scene;
     HexBoard * hex_board;
-    QString whos_turn;
-private:
 
 public slots:
     void start();
+
+private:
+    void drowPanel(int x, int y, int width, int height, QColor color, double opacity);
+    void drawGUI();
+
+    QString whos_turn;
+    QGraphicsTextItem * whos_turn_text;
 };
 
 #endif // GAME_H

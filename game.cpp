@@ -25,6 +25,46 @@ void Game::start()
     // test code
     hex_board = new HexBoard;
     hex_board->placeHexes(100, 100, 5, 5);
+
+    drawGUI();
+}
+
+void Game::drowPanel(int x, int y, int width, int height, QColor color, double opacity)
+{
+    // drow panel
+    QGraphicsRectItem * panel = new QGraphicsRectItem(x, y, width, height);
+    QBrush bruch;
+    bruch.setStyle(Qt::SolidPattern);
+    bruch.setColor(color);
+    panel->setBrush(bruch);
+    panel->setOpacity(opacity);
+
+    scene->addItem(panel);
+}
+
+void Game::drawGUI()
+{
+    // drow the left panel
+    drowPanel(0, 0, 150, 768, Qt::darkCyan, 0.5);
+
+    // draw the right panel
+    drowPanel(874, 0, 150, 768, Qt::darkCyan, 0.5);
+
+    // place player one text
+    QGraphicsTextItem * p1 = new QGraphicsTextItem("Player 1's cards");
+    p1->setPos(25, 0);
+    scene->addItem(p1);
+
+    // place player two text
+    QGraphicsTextItem * p2 = new QGraphicsTextItem("Player 2's cards");
+    p2->setPos(874 + 25, 0);
+    scene->addItem(p2);
+
+    // whos tur text
+    whos_turn_text = new QGraphicsTextItem;
+    setWhosTurn(QString("Player 1"));
+    whos_turn_text->setPos(490,0);
+    scene->addItem(whos_turn_text);
 }
 
 void Game::displayMainMenu()
@@ -56,4 +96,19 @@ void Game::displayMainMenu()
     quit_button->setPos(qx_pos, qy_pos);
     connect(quit_button, SIGNAL(clicked()),this,SLOT(close()));
     scene->addItem(quit_button);
+}
+
+QString Game::getWhosTurn()
+{
+    return whos_turn;
+}
+
+void Game::setWhosTurn(QString player)
+{
+    // change qstring
+    whos_turn = player;
+
+    // change text
+    whos_turn_text->setPlainText(QString("Whos turn: ") + player);
+
 }
