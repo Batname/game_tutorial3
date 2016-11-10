@@ -6,10 +6,10 @@
 #include <QGraphicsTextItem>
 #include <QObject>
 
-//enum ButtonType{
-//    READ_BUTTON,
-//    BLACK_BUTTON
-//};
+enum ButtonType{
+    READ_BUTTON,
+    BLACK_BUTTON
+};
 
 class Button : public QObject, public QGraphicsRectItem
 {
@@ -18,14 +18,14 @@ public:
     Button(QString name, QGraphicsItem * parent=0);
 
     // public methods
-//    void mousePressEvent(QGraphicsSceneMouseEvent *event);
-//    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
-//    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
-signals:
+    void mousePressEvent(QGraphicsSceneMouseEvent *event);
+    void hoverEnterEvent(QGraphicsSceneHoverEvent *event);
+    void hoverLeaveEvent(QGraphicsSceneHoverEvent *event);
+//signals:
 //    void clicked();
 
 private:
-//    QString name;
+    QString name;
     QGraphicsTextItem * text;
 };
 

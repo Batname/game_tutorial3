@@ -21,3 +21,23 @@ Button::Button(QString name, QGraphicsItem *parent) : QGraphicsRectItem(parent)
     // allow event
     setAcceptHoverEvents(true);
 }
+
+void Button::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+
+}
+
+void Button::hoverEnterEvent(QGraphicsSceneHoverEvent *event)
+{
+
+}
+
+void Button::hoverLeaveEvent(QGraphicsSceneHoverEvent *event)
+{
+
+}
+
+//void Button::clicked()
+//{
+
+//}
