@@ -18,5 +18,5 @@ void Game::start()
 {
     // test code
     hex_board = new HexBoard;
-    hex_board->placeHexes();
+    hex_board->placeHexes(100, 100, 5, 5);
 }
