@@ -18,3 +18,8 @@ Hex::Hex(QGraphicsItem *parent)
     // draw polygon
     setPolygon(hexagon);
 }
+
+void Hex::setOwner(QString player)
+{
+    owner = player;
+}

@@ -27,6 +27,7 @@ void Game::start()
     hex_board->placeHexes(100, 100, 5, 5);
 
     drawGUI();
+    createInitialCards();
 }
 
 void Game::drowPanel(int x, int y, int width, int height, QColor color, double opacity)
@@ -65,6 +66,61 @@ void Game::drawGUI()
     setWhosTurn(QString("Player 1"));
     whos_turn_text->setPos(490,0);
     scene->addItem(whos_turn_text);
+}
+
+void Game::createNewCard(QString player)
+{
+     Hex * card = new Hex;
+     card->setOwner(player);
+
+     // add card to the list
+     if (player == QString("PLAYER1"))
+         player1_cards.append(card);
+     else
+         player2_cards.append(card);
+}
+
+void Game::createInitialCards()
+{
+    // player 1 cards
+    for (size_t i = 0, n = 5; i < n; ++i) {
+        createNewCard(QString("PLAYER1"));
+    }
+
+    // player 2 cards
+    for (size_t i = 0, n = 5; i < n; ++i) {
+        createNewCard(QString("PLAYER2"));
+    }
+
+    // draw cards
+    drawCards();
+}
+
+void Game::drawCards()
+{
+    // remove player 1 cards
+    for (size_t i = 0, n = player1_cards.size(); i < n; ++i) {
+        scene->removeItem(player1_cards[i]);
+    }
+
+    // remove player 2 cards
+    for (size_t i = 0, n = player2_cards.size(); i < n; ++i) {
+        scene->removeItem(player2_cards[i]);
+    }
+
+    // draw player 1 cards
+    for (size_t i = 0, n = player1_cards.size(); i < n; ++i) {
+        Hex * card = player1_cards[i];
+        card->setPos(13, 25 + 85 * i);
+        scene->addItem(card);
+    }
+
+    // draw player 2 cards
+    for (size_t i = 0, n = player2_cards.size(); i < n; ++i) {
+        Hex * card = player2_cards[i];
+        card->setPos(874 + 13, 25 + 85 * i);
+        scene->addItem(card);
+    }
 }
 
 void Game::displayMainMenu()

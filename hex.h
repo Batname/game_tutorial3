@@ -13,6 +13,7 @@ public:
 
     // setters
     void setAttackOf(int size, int attack);
+    void setOwner(QString player);
 private:
     QString owner;
     int side1_of_attack;
