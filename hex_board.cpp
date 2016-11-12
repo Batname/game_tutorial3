@@ -38,5 +38,6 @@ void HexBoard::createHexColumn(int x, int y, int num_of_rows)
 
         // set owner to NODE initially
         hex->setOwner(PlayerType::NONE);
+        hex->setIsPlaced(true);
     }
 }

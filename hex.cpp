@@ -23,6 +23,8 @@ Hex::Hex(QGraphicsItem *parent)
 
     // draw polygon
     setPolygon(hexagon);
+
+    is_placed = false;
 }
 
 bool Hex::getIsPlaced()
