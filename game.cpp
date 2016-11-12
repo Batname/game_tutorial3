@@ -297,25 +297,28 @@ void Game::removeFromDeck(Hex *card, PlayerType player)
 
 void Game::gameOver()
 {
-    // count haxes
-    int p1_haxes = 0;
-    int p2_haxes = 0;
-
-    for (size_t i = 0, n = hex_board->getHexes().size(); i < n; ++i) {
-        if (hex_board->getHexes()[i]->getOwner() == PlayerType::PLAYER_ONE) p1_haxes++;
-        else if (hex_board->getHexes()[i]->getOwner() == PlayerType::PLAYER_TWO) p2_haxes++;
+    int p1_hexes = 0;
+    int p2_hexes = 0;
+    for (size_t i = 0, n = hex_board->getHexes().size(); i < n; ++i){
+        if (hex_board->getHexes()[i]->getOwner() == PlayerType::PLAYER_ONE){
+            p1_hexes++;
+        }
+        else if (hex_board->getHexes()[i]->getOwner() == PlayerType::PLAYER_TWO){
+            p2_hexes++;
+        }
+    }
+    QString messege;
+    if (p1_hexes > p2_hexes){
+        messege = "Player 1 has won!";
+    }
+    else if (p2_hexes > p1_hexes){
+        messege = "Player 2 has won!";
+    }
+    else {
+        messege = "Tie game!";
     }
 
-    QString message;
-    if (p1_haxes < p2_haxes) {
-        message = "Player 1 has won";
-    } else if (p2_haxes > p1_haxes) {
-        message = "Player 2 has won";
-    } else {
-        message = "The game!";
-    }
-
-    displayGameOverWindow(message);
+    displayGameOverWindow(messege);
 }
 
 Hex *Game::getCardToPlace()

@@ -102,7 +102,9 @@ void Hex::mousePressEvent(QGraphicsSceneMouseEvent *event)
     if (getIsPlaced() == false && !game->getCardToPlace()) {
         game->pickUpCard(this);
     } else if (game->getCardToPlace()) {
-        game->placeCard(this);
+        int index_of_this = game->hex_board->getHexes().indexOf(this);
+        if (index_of_this != -1)
+            game->placeCard(this);
     }
 }
 
