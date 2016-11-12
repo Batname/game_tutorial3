@@ -100,12 +100,14 @@ void Game::drawCards()
 {
     // remove player 1 cards
     for (size_t i = 0, n = player1_cards.size(); i < n; ++i) {
-        scene->removeItem(player1_cards[i]);
+        if (player1_cards[i]->type() == QGraphicsItem::Type)
+            scene->removeItem(player1_cards[i]);
     }
 
     // remove player 2 cards
     for (size_t i = 0, n = player2_cards.size(); i < n; ++i) {
-        scene->removeItem(player2_cards[i]);
+        if (player1_cards[i]->type() == QGraphicsItem::Type)
+            scene->removeItem(player2_cards[i]);
     }
 
     // draw player 1 cards
