@@ -1,6 +1,7 @@
 #include "hex_board.h"
 #include "hex.h"
 #include "game.h"
+#include "player_type.h"
 
 extern Game * game;
 
@@ -34,5 +35,8 @@ void HexBoard::createHexColumn(int x, int y, int num_of_rows)
         hex->setPos(x, y+Y_SHIFT*i);
         hexes.append(hex);
         game->scene->addItem(hex);
+
+        // set owner to NODE initially
+        hex->setOwner(PlayerType::NONE);
     }
 }

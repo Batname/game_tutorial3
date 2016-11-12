@@ -1,4 +1,7 @@
 #include "hex.h"
+#include "player_type.h"
+
+#include <QBrush>
 
 Hex::Hex(QGraphicsItem *parent)
 {
@@ -19,7 +22,31 @@ Hex::Hex(QGraphicsItem *parent)
     setPolygon(hexagon);
 }
 
+PlayerType Hex::getOwner()
+{
+    return owner;
+}
+
 void Hex::setOwner(PlayerType player)
 {
+    // set the owner
     owner = player;
+
+    // change the color
+    if (player == PlayerType::NONE) {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::lightGray);
+        setBrush(brush);
+    } else if (player == PlayerType::PLAYER_ONE) {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::blue);
+        setBrush(brush);
+    } else if (player == PlayerType::PLAYER_TWO) {
+        QBrush brush;
+        brush.setStyle(Qt::SolidPattern);
+        brush.setColor(Qt::red);
+        setBrush(brush);
+    }
 }

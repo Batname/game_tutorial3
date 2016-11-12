@@ -33,6 +33,7 @@ private:
     // private  attributes
     PlayerType whos_turn;
     QGraphicsTextItem * whos_turn_text;
+    Hex * card_to_place;
 
     QList<Hex *> player1_cards;
     QList<Hex *> player2_cards;

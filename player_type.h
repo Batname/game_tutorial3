@@ -3,7 +3,8 @@
 
 enum class PlayerType{
     PLAYER_ONE,
-    PLAYER_TWO
+    PLAYER_TWO,
+    NONE
 };
 
 #endif // PLAYERTYPE_H

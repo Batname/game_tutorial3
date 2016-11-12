@@ -12,11 +12,15 @@ public:
 
     // getters
     int getAttackOf(int size);
+    bool isPlaced();
+    PlayerType getOwner();
 
     // setters
     void setAttackOf(int size, int attack);
     void setOwner(PlayerType player);
+    void setIsPlaced(bool b);
 private:
+    bool is_placed;
     PlayerType owner;
     int side1_of_attack;
     int side2_of_attack;

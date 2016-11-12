@@ -16,6 +16,9 @@ Game::Game(QWidget *parent)
     scene = new QGraphicsScene;
     scene->setSceneRect(0,0,1024,768);
     setScene(scene);
+
+    // initialize
+    card_to_place = NULL;
 }
 
 void Game::start()
@@ -77,7 +80,7 @@ void Game::createNewCard(PlayerType player)
      // add card to the list
      if (player == PlayerType::PLAYER_ONE)
          player1_cards.append(card);
-     else
+     else if (player == PlayerType::PLAYER_TWO)
          player2_cards.append(card);
 }
 
@@ -171,7 +174,7 @@ void Game::setWhosTurn(PlayerType player)
 
     if (player == PlayerType::PLAYER_ONE)
         text = QString("Whos turn: player1");
-    else
+    else if (player == PlayerType::PLAYER_TWO)
         text = QString("Whos turn: player2");
 
     whos_turn_text->setPlainText(text);
