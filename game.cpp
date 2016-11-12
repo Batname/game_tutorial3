@@ -3,6 +3,8 @@
 #include "button.h"
 #include "player_type.h"
 
+#include "stdlib.h" // rand()
+#include "time.h" // time()
 #include <QGraphicsTextItem>
 #include <QDebug>
 
@@ -78,6 +80,16 @@ void Game::createNewCard(PlayerType player)
      Hex * card = new Hex;
      card->setOwner(player);
      card->setIsPlaced(false);
+
+     // randomize size
+     for (size_t i = 0, n = 6; i < n; i++) {
+         // generate rand
+         int rand_num = rand() % 6 + 1; // 1 - 6
+         card->setAttackOf(i, rand_num);
+     }
+
+     // make side attack visible
+     card->displaySideAttack();
 
      // add card to the list
      if (player == PlayerType::PLAYER_ONE){
