@@ -220,6 +220,7 @@ void Game::placeCard(Hex *hex_to_replace)
 
     // find neighbors
     card_to_place->findNeighbors();
+    card_to_place->captureNaighbors();
 
     card_to_place = NULL;
 

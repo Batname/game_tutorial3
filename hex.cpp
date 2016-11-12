@@ -65,6 +65,23 @@ Hex::Hex(QGraphicsItem *parent)
     }
 }
 
+int Hex::getAttackOf(int side)
+{
+    if (side == 0) {
+        return side0_of_attack;
+    } else if (side == 1) {
+       return side1_of_attack;
+    } else if (side == 2) {
+       return side2_of_attack;
+    } else if (side == 3) {
+       return side3_of_attack;
+    } else if (side == 4) {
+       return side4_of_attack;
+    } else if (side == 5) {
+       return side5_of_attack;
+    }
+}
+
 bool Hex::getIsPlaced()
 {
     return is_placed;
@@ -163,7 +180,7 @@ void Hex::createLines()
        ln_copy.setAngle(90+60 * i);
        QGraphicsLineItem * line = new QGraphicsLineItem(ln_copy, this);
        lines.append(line);
-       line->setVisible(false);
+//       line->setVisible(false);
     }
 }
 
@@ -176,6 +193,58 @@ void Hex::findNeighbors()
             Hex * item = dynamic_cast<Hex *>(c_items[j]);
             if (c_items[j] != this && item) {
                 neighbors.append(item);
+            }
+        }
+    }
+}
+
+void Hex::switchOwner()
+{
+    if (getOwner() == PlayerType::PLAYER_ONE) {
+        setOwner(PlayerType::PLAYER_TWO);
+    } else if (getOwner() == PlayerType::PLAYER_TWO) {
+        setOwner(PlayerType::PLAYER_ONE );
+    }
+}
+
+void Hex::captureNaighbors()
+{
+    for (size_t i = 0, n = neighbors.size(); i < n; i++) {
+        bool is_enamy = false;
+        bool is_not_neutral = false;
+        if (this->getOwner() != neighbors[i]->getOwner()) {
+            is_enamy = true;
+        }
+
+        if (neighbors[i]->getOwner()  != PlayerType::NONE) {
+            is_not_neutral = true;
+        }
+
+        if (is_enamy && is_not_neutral) {
+            int this_attack = 0;
+            int neighbor_attack = 0;
+            if (i == 0) {
+                this_attack = getAttackOf(0);
+                neighbor_attack = neighbors[0]->getAttackOf(3);
+            } else if (i == 1) {
+                this_attack = getAttackOf(1);
+                neighbor_attack = neighbors[1]->getAttackOf(4);
+            } else if (i == 2) {
+                this_attack = getAttackOf(2);
+                neighbor_attack = neighbors[2]->getAttackOf(5);
+            } else if (i == 3) {
+                this_attack = getAttackOf(3);
+                neighbor_attack = neighbors[3]->getAttackOf(0);
+            } else if (i == 4) {
+                this_attack = getAttackOf(4);
+                neighbor_attack = neighbors[4]->getAttackOf(1);
+            } else if (i == 5) {
+                this_attack = getAttackOf(5);
+                neighbor_attack = neighbors[5]->getAttackOf(2);
+            }
+
+            if (this_attack > neighbor_attack) {
+                neighbors[i]->switchOwner();
             }
         }
     }

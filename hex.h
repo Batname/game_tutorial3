@@ -12,7 +12,7 @@ public:
     Hex(QGraphicsItem * parent=0);
 
     // getters
-    int getAttackOf(int size);
+    int getAttackOf(int side);
     bool getIsPlaced();
     PlayerType getOwner();
 
@@ -28,6 +28,8 @@ public:
     void displaySideAttack();
     void createLines();
     void findNeighbors();
+    void switchOwner();
+    void captureNaighbors();
 
 private:
     bool is_placed;
