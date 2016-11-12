@@ -20,7 +20,7 @@ public:
     void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
     // setters
-    void setAttackOf(int size, int attack);
+    void setAttackOf(int side, int attack);
     void setOwner(PlayerType player);
     void setIsPlaced(bool b);
 

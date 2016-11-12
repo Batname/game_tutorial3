@@ -20,9 +20,14 @@ void HexBoard::placeHexes(int x, int y, int num_of_columns, int num_of_rows)
     int X_SHIFT = 82;
     int Y_SHIFT = 41;
 
-    for (size_t i = 0, n = num_of_columns; i < n; ++i) {
-        if (i % 2 == 0) createHexColumn(x+X_SHIFT*i, y, num_of_rows);
-        else createHexColumn(x+X_SHIFT*i, y+Y_SHIFT, num_of_rows);
+    for (size_t i = 0, n = num_of_columns; i < n; i++){
+        if (i % 2 == 0){ // even column
+            Y_SHIFT = 0;
+        }
+        else{ // odd column
+            Y_SHIFT = 41;
+        }
+        createHexColumn(x+X_SHIFT*i,y+Y_SHIFT,num_of_rows);
     }
 }
 

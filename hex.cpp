@@ -5,6 +5,7 @@
 #include <QBrush>
 #include <QGraphicsTextItem>
 #include <QLineF>
+#include <QDebug>
 
 extern Game * game;
 
@@ -65,20 +66,24 @@ Hex::Hex(QGraphicsItem *parent)
     }
 }
 
-int Hex::getAttackOf(int side)
-{
-    if (side == 0) {
+int Hex::getAttackOf(int side){
+    if (side == 0){
         return side0_of_attack;
-    } else if (side == 1) {
-       return side1_of_attack;
-    } else if (side == 2) {
-       return side2_of_attack;
-    } else if (side == 3) {
-       return side3_of_attack;
-    } else if (side == 4) {
-       return side4_of_attack;
-    } else if (side == 5) {
-       return side5_of_attack;
+    }
+    else if (side == 1){
+        return side1_of_attack;
+    }
+    else if (side == 2){
+        return side2_of_attack;
+    }
+    else if (side == 3){
+        return side3_of_attack;
+    }
+    else if (side == 4){
+        return side4_of_attack;
+    }
+    else if (side == 5){
+        return side5_of_attack;
     }
 }
 
@@ -101,35 +106,27 @@ void Hex::mousePressEvent(QGraphicsSceneMouseEvent *event)
     }
 }
 
-void Hex::setAttackOf(int size, int attack)
+void Hex::setAttackOf(int side, int attack)
 {
-    switch (size) {
+    switch (side) {
     case 0:
         side0_of_attack = attack;
         attack_texts[0]->setPlainText(QString::number(attack));
-        break;
     case 1:
-        side0_of_attack = attack;
+        side1_of_attack = attack;
         attack_texts[1]->setPlainText(QString::number(attack));
-        break;
     case 2:
-        side0_of_attack = attack;
+        side2_of_attack = attack;
         attack_texts[2]->setPlainText(QString::number(attack));
-        break;
     case 3:
-        side0_of_attack = attack;
+        side3_of_attack = attack;
         attack_texts[3]->setPlainText(QString::number(attack));
-        break;
     case 4:
-        side0_of_attack = attack;
+        side4_of_attack = attack;
         attack_texts[4]->setPlainText(QString::number(attack));
-        break;
     case 5:
-        side0_of_attack = attack;
+        side5_of_attack = attack;
         attack_texts[5]->setPlainText(QString::number(attack));
-        break;
-    default:
-        break;
     }
 }
 
@@ -180,13 +177,13 @@ void Hex::createLines()
        ln_copy.setAngle(90+60 * i);
        QGraphicsLineItem * line = new QGraphicsLineItem(ln_copy, this);
        lines.append(line);
-//       line->setVisible(false);
+       line->setVisible(false);
     }
 }
 
 void Hex::findNeighbors()
 {
-    for (size_t i = 0, n = 6; i < n; i++) {
+    for (size_t i = 0, n = lines.size(); i < n; i++) {
         // check if that collides and add to Neighbors
         QList<QGraphicsItem *> c_items = lines[i]->collidingItems();
         for (size_t j = 0, m = c_items.size(); j < m; j++) {

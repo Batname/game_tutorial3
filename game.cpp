@@ -81,11 +81,11 @@ void Game::createNewCard(PlayerType player)
      card->setOwner(player);
      card->setIsPlaced(false);
 
-     // randomize size
-     for (size_t i = 0, n = 6; i < n; i++) {
-         // generate rand
-         int rand_num = rand() % 6 + 1; // 1 - 6
-         card->setAttackOf(i, rand_num);
+     // randommize side attacks of card
+     for (size_t i = 0, n = 6; i < n; i++){
+         // generate a random number
+         int randNum = rand() % 6 + 1; // 1 - 6
+         card->setAttackOf(i,randNum);
      }
 
      // make side attack visible
