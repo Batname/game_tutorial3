@@ -217,6 +217,10 @@ void Game::placeCard(Hex *hex_to_replace)
     scene->removeItem(hex_to_replace);
     card_to_place->setIsPlaced(true);
     removeFromDeck(card_to_place, getWhosTurn());
+
+    // find neighbors
+    card_to_place->findNeighbors();
+
     card_to_place = NULL;
 
     // replace new card

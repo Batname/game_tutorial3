@@ -4,6 +4,7 @@
 
 #include <QBrush>
 #include <QGraphicsTextItem>
+#include <QLineF>
 
 extern Game * game;
 
@@ -26,6 +27,8 @@ Hex::Hex(QGraphicsItem *parent)
     setPolygon(hexagon);
 
     is_placed = false;
+
+    createLines();
 
     // size attack
     side0_of_attack = 0;
@@ -146,5 +149,34 @@ void Hex::displaySideAttack()
 {
     for (size_t i = 0, n = attack_texts.size(); i < n; i++) {
         attack_texts[i]->setVisible(true);
+    }
+}
+
+void Hex::createLines()
+{
+    QPointF hex_center(x()+60, y()+40);
+    QPointF final_pt(hex_center.x(), hex_center.y() - 65);
+    QLineF ln(hex_center, final_pt);
+
+    for (size_t i = 0, n = 6; i < n; i++) {
+       QLineF ln_copy(ln);
+       ln_copy.setAngle(90+60 * i);
+       QGraphicsLineItem * line = new QGraphicsLineItem(ln_copy, this);
+       lines.append(line);
+       line->setVisible(false);
+    }
+}
+
+void Hex::findNeighbors()
+{
+    for (size_t i = 0, n = 6; i < n; i++) {
+        // check if that collides and add to Neighbors
+        QList<QGraphicsItem *> c_items = lines[i]->collidingItems();
+        for (size_t j = 0, m = c_items.size(); j < m; j++) {
+            Hex * item = dynamic_cast<Hex *>(c_items[j]);
+            if (c_items[j] != this && item) {
+                neighbors.append(item);
+            }
+        }
     }
 }

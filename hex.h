@@ -24,8 +24,10 @@ public:
     void setOwner(PlayerType player);
     void setIsPlaced(bool b);
 
-    // member function
+    // methods
     void displaySideAttack();
+    void createLines();
+    void findNeighbors();
 
 private:
     bool is_placed;
@@ -37,6 +39,10 @@ private:
     int side4_of_attack;
     int side5_of_attack;
     QList<QGraphicsTextItem *> attack_texts;
+    QList<Hex *> neighbors;
+    QList<QGraphicsLineItem *> lines;
+
+    // methods
 };
 
 #endif // HEX_H
