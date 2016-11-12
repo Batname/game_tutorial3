@@ -1,7 +1,10 @@
 #include "hex.h"
 #include "player_type.h"
+#include "game.h"
 
 #include <QBrush>
+
+extern Game * game;
 
 Hex::Hex(QGraphicsItem *parent)
 {
@@ -22,9 +25,23 @@ Hex::Hex(QGraphicsItem *parent)
     setPolygon(hexagon);
 }
 
+bool Hex::getIsPlaced()
+{
+    return is_placed;
+}
+
 PlayerType Hex::getOwner()
 {
     return owner;
+}
+
+void Hex::mousePressEvent(QGraphicsSceneMouseEvent *event)
+{
+    if (getIsPlaced() == false) {
+        game->pickUpCard(this);
+    } else {
+        game->placeCard(this);
+    }
 }
 
 void Hex::setOwner(PlayerType player)
@@ -49,4 +66,9 @@ void Hex::setOwner(PlayerType player)
         brush.setColor(Qt::red);
         setBrush(brush);
     }
+}
+
+void Hex::setIsPlaced(bool b)
+{
+    is_placed = b;
 }

@@ -4,6 +4,7 @@
 #include "player_type.h"
 
 #include <QGraphicsPolygonItem>
+#include <QGraphicsSceneMouseEvent>
 
 class Hex : public QGraphicsPolygonItem
 {
@@ -12,8 +13,11 @@ public:
 
     // getters
     int getAttackOf(int size);
-    bool isPlaced();
+    bool getIsPlaced();
     PlayerType getOwner();
+
+    // events
+    void mousePressEvent(QGraphicsSceneMouseEvent * event);
 
     // setters
     void setAttackOf(int size, int attack);
