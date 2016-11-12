@@ -19,22 +19,32 @@ Game::Game(QWidget *parent)
     scene = new QGraphicsScene;
     scene->setSceneRect(0,0,1024,768);
     setScene(scene);
-
-    // initialize
-    card_to_place = NULL;
 }
 
 void Game::start()
 {
+    // initialize
+    card_to_place = NULL;
+    number_of_card_placed = 0;
+
     // clear the screen
     scene->clear();
 
     // test code
     hex_board = new HexBoard;
-    hex_board->placeHexes(200, 30, 7, 7);
+    hex_board->placeHexes(200, 30, 3, 3);
 
     drawGUI();
     createInitialCards();
+}
+
+void Game::restartGame()
+{
+    player1_cards.clear();
+    player2_cards.clear();
+    hex_board->getHexes().clear();
+    scene->clear();
+    start();
 }
 
 void Game::drowPanel(int x, int y, int width, int height, QColor color, double opacity)
@@ -148,6 +158,37 @@ void Game::drawCards()
     }
 }
 
+void Game::displayGameOverWindow(QString message)
+{
+    for (size_t i = 0, n = scene->items().size(); i < n; ++i) {
+        scene->items()[i]->setEnabled(false);
+    }
+
+    // pop up
+    drowPanel(0,0,1024,768,Qt::black,0.65);
+
+    // draw panel
+    drowPanel(312,182,400,400,Qt::lightGray,0.75);
+
+    // create play again button
+    Button *play_again = new Button(QString("Play again"));
+    play_again->setPos(410, 300);
+    scene->addItem(play_again);
+
+    connect(play_again, SIGNAL(clicked()), this, SLOT(restartGame()));
+
+    // create quit button
+    Button * quit_button = new Button(QString("Quit"));
+    quit_button->setPos(410, 375);
+    scene->addItem(quit_button);
+    connect(quit_button, SIGNAL(clicked()),this,SLOT(close()));
+
+    // create text
+    QGraphicsTextItem *text_winner = new QGraphicsTextItem(message);
+    text_winner->setPos(460, 255);
+    scene->addItem(text_winner);
+}
+
 void Game::displayMainMenu()
 {
     // create title
@@ -228,6 +269,12 @@ void Game::placeCard(Hex *hex_to_replace)
     createNewCard(getWhosTurn());
 
     nextPlayersTurn();
+
+    number_of_card_placed++;
+
+    if (number_of_card_placed >= hex_board->getHexes().size()) {
+        gameOver();
+    }
 }
 
 void Game::nextPlayersTurn()
@@ -246,6 +293,29 @@ void Game::removeFromDeck(Hex *card, PlayerType player)
     } else if (player == PlayerType::PLAYER_TWO) {
         player2_cards.removeAll(card);
     }
+}
+
+void Game::gameOver()
+{
+    // count haxes
+    int p1_haxes = 0;
+    int p2_haxes = 0;
+
+    for (size_t i = 0, n = hex_board->getHexes().size(); i < n; ++i) {
+        if (hex_board->getHexes()[i]->getOwner() == PlayerType::PLAYER_ONE) p1_haxes++;
+        else if (hex_board->getHexes()[i]->getOwner() == PlayerType::PLAYER_TWO) p2_haxes++;
+    }
+
+    QString message;
+    if (p1_haxes < p2_haxes) {
+        message = "Player 1 has won";
+    } else if (p2_haxes > p1_haxes) {
+        message = "Player 2 has won";
+    } else {
+        message = "The game!";
+    }
+
+    displayGameOverWindow(message);
 }
 
 void Game::mouseMoveEvent(QMouseEvent *event)

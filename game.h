@@ -21,6 +21,7 @@ public:
     void placeCard(Hex *hex_to_replace);
     void nextPlayersTurn();
     void removeFromDeck(Hex * card, PlayerType player);
+    void gameOver();
 
     // events
     void mouseMoveEvent(QMouseEvent * event);
@@ -30,9 +31,11 @@ public:
     QGraphicsScene * scene;
     HexBoard * hex_board;
     QPointF original_position;
+    int number_of_card_placed;
 
 public slots:
     void start();
+    void restartGame();
 
 private:
     // private methods
@@ -41,6 +44,7 @@ private:
     void createNewCard(PlayerType player);
     void createInitialCards();
     void drawCards();
+    void displayGameOverWindow(QString message);
 
     // private  attributes
     PlayerType whos_turn;
