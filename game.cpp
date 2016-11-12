@@ -318,6 +318,11 @@ void Game::gameOver()
     displayGameOverWindow(message);
 }
 
+Hex *Game::getCardToPlace()
+{
+    return card_to_place;
+}
+
 void Game::mouseMoveEvent(QMouseEvent *event)
 {
     if (card_to_place) {
@@ -329,6 +334,7 @@ void Game::mouseMoveEvent(QMouseEvent *event)
 
 void Game::mousePressEvent(QMouseEvent *event)
 {
+
     //  right click to original
     if (event->button() == Qt::RightButton) {
         if (card_to_place) {

@@ -99,9 +99,9 @@ PlayerType Hex::getOwner()
 
 void Hex::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    if (getIsPlaced() == false) {
+    if (getIsPlaced() == false && !game->getCardToPlace()) {
         game->pickUpCard(this);
-    } else {
+    } else if (game->getCardToPlace()) {
         game->placeCard(this);
     }
 }

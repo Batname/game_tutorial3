@@ -22,6 +22,7 @@ public:
     void nextPlayersTurn();
     void removeFromDeck(Hex * card, PlayerType player);
     void gameOver();
+    Hex *getCardToPlace();
 
     // events
     void mouseMoveEvent(QMouseEvent * event);
