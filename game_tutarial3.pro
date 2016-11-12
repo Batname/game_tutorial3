@@ -23,6 +23,7 @@ HEADERS  += \
     game.h \
     hex.h \
     hex_board.h \
-    button.h
+    button.h \
+    player_type.h
 
 FORMS    +=

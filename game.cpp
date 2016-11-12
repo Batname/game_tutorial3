@@ -1,6 +1,7 @@
 #include "game.h"
 #include "hex_board.h"
 #include "button.h"
+#include "player_type.h"
 
 #include <QGraphicsTextItem>
 
@@ -24,7 +25,7 @@ void Game::start()
 
     // test code
     hex_board = new HexBoard;
-    hex_board->placeHexes(100, 100, 5, 5);
+    hex_board->placeHexes(200, 30, 7, 7);
 
     drawGUI();
     createInitialCards();
@@ -63,18 +64,18 @@ void Game::drawGUI()
 
     // whos tur text
     whos_turn_text = new QGraphicsTextItem;
-    setWhosTurn(QString("Player 1"));
+    setWhosTurn(PlayerType::PLAYER_ONE);
     whos_turn_text->setPos(490,0);
     scene->addItem(whos_turn_text);
 }
 
-void Game::createNewCard(QString player)
+void Game::createNewCard(PlayerType player)
 {
      Hex * card = new Hex;
      card->setOwner(player);
 
      // add card to the list
-     if (player == QString("PLAYER1"))
+     if (player == PlayerType::PLAYER_ONE)
          player1_cards.append(card);
      else
          player2_cards.append(card);
@@ -84,12 +85,12 @@ void Game::createInitialCards()
 {
     // player 1 cards
     for (size_t i = 0, n = 5; i < n; ++i) {
-        createNewCard(QString("PLAYER1"));
+        createNewCard(PlayerType::PLAYER_ONE);
     }
 
     // player 2 cards
     for (size_t i = 0, n = 5; i < n; ++i) {
-        createNewCard(QString("PLAYER2"));
+        createNewCard(PlayerType::PLAYER_TWO);
     }
 
     // draw cards
@@ -156,17 +157,23 @@ void Game::displayMainMenu()
     scene->addItem(quit_button);
 }
 
-QString Game::getWhosTurn()
+PlayerType Game::getWhosTurn()
 {
     return whos_turn;
 }
 
-void Game::setWhosTurn(QString player)
+void Game::setWhosTurn(PlayerType player)
 {
-    // change qstring
     whos_turn = player;
 
     // change text
-    whos_turn_text->setPlainText(QString("Whos turn: ") + player);
+    QString text;
+
+    if (player == PlayerType::PLAYER_ONE)
+        text = QString("Whos turn: player1");
+    else
+        text = QString("Whos turn: player2");
+
+    whos_turn_text->setPlainText(text);
 
 }

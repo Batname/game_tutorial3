@@ -1,6 +1,8 @@
 #ifndef HEX_H
 #define HEX_H
 
+#include "player_type.h"
+
 #include <QGraphicsPolygonItem>
 
 class Hex : public QGraphicsPolygonItem
@@ -13,9 +15,9 @@ public:
 
     // setters
     void setAttackOf(int size, int attack);
-    void setOwner(QString player);
+    void setOwner(PlayerType player);
 private:
-    QString owner;
+    PlayerType owner;
     int side1_of_attack;
     int side2_of_attack;
     int side3_of_attack;

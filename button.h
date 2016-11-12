@@ -7,11 +7,6 @@
 #include <QObject>
 #include <QGraphicsSceneHoverEvent>
 
-enum ButtonType{
-    READ_BUTTON,
-    BLACK_BUTTON
-};
-
 class Button : public QObject, public QGraphicsRectItem
 {
     Q_OBJECT

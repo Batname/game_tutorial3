@@ -19,7 +19,7 @@ Hex::Hex(QGraphicsItem *parent)
     setPolygon(hexagon);
 }
 
-void Hex::setOwner(QString player)
+void Hex::setOwner(PlayerType player)
 {
     owner = player;
 }

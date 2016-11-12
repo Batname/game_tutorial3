@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include "hex_board.h"
+#include "player_type.h"
 
 #include <QGraphicsView>
 
@@ -12,8 +13,8 @@ public:
     Game(QWidget * parent=0);
     void displayMainMenu();
 
-    QString getWhosTurn();
-    void setWhosTurn(QString player);
+    PlayerType getWhosTurn();
+    void setWhosTurn(PlayerType player);
 
     QGraphicsScene * scene;
     HexBoard * hex_board;
@@ -25,12 +26,12 @@ private:
     // private methods
     void drowPanel(int x, int y, int width, int height, QColor color, double opacity);
     void drawGUI();
-    void createNewCard(QString player);
+    void createNewCard(PlayerType player);
     void createInitialCards();
     void drawCards();
 
     // private  attributes
-    QString whos_turn;
+    PlayerType whos_turn;
     QGraphicsTextItem * whos_turn_text;
 
     QList<Hex *> player1_cards;
