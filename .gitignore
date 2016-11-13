@@ -1,2 +1,4 @@
-game_tutorial1.pro.user
+./build-*
+build
+*.app/
 Makefile
